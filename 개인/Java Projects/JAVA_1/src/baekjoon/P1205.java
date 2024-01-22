@@ -33,22 +33,25 @@ public class P1205 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
-		
+
 		int n = s.nextInt();
 		int score = s.nextInt();
 		int p = s.nextInt();
-		
+
 		ArrayList<Integer> arr = new ArrayList<Integer>();
-		
-		for(int i=0; i<n; i++) {
+		int Min = Integer.MAX_VALUE;
+		for (int i = 0; i < n; i++) {
 			arr.add(s.nextInt());
 		}
-		arr.add(p);
+		arr.add(score);
 		arr.sort(Comparator.reverseOrder());
-		if(arr.get(n) == p) System.out.println(-1);
-		else {
-			
+		System.out.println(arr.indexOf(score));
+		if (arr.indexOf(score) != n) {
+			System.out.println(arr.indexOf(score) + 1);
+		} else {
+			System.out.println(-1);
 		}
+		System.out.println(arr.toString());
 	}
 
 }
