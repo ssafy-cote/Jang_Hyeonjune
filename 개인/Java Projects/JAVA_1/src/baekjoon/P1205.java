@@ -41,6 +41,7 @@ public class P1205 {
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int Min = Integer.MAX_VALUE;
 		for (int i = 0; i < n; i++) {
+			
 			arr.add(s.nextInt());
 		}
 		arr.add(score);
