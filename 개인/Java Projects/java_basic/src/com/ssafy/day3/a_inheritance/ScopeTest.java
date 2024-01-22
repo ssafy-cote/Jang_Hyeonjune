@@ -5,7 +5,7 @@ class Parent {
 }
 
 class Child extends Parent {
-    String x = "child";
+//    String x = "child";
 
     void method() {
         String x = "method";

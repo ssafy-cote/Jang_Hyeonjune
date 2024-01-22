@@ -15,9 +15,16 @@ public class InstanceOfTest {
 	}
 
 	private void safeCasting() {
-		// TODO: 위 메서드가 안전하게 형 변환할 수 있도록 수정해보자.
-
-		// END
+	    Object obj = 1;
+	    if (obj instanceof String) {
+	        String s = (String) obj; // Integer -> String
+	        System.out.println(s.length());
+	    } else if (obj instanceof Integer) {
+	        String s = String.valueOf(obj); // Integer -> String
+	        System.out.println(s.length());
+	    } else {
+	        System.out.println("문자열 아닌데?");
+	    }
 	}
 
 	public static void main(String[] args) {
