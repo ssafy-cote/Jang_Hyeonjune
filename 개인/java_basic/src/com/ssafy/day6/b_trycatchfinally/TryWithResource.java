@@ -1,6 +1,7 @@
 package com.ssafy.day6.b_trycatchfinally;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class TryWithResource {
@@ -32,7 +33,14 @@ public class TryWithResource {
 
     public void useStreamNewStye() {
         // TODO: useStream을 try~with~resource 문장으로 변경하세요.
-
+    	try(FileInputStream input = new FileInputStream("abc.txt");) {
+    		input.read();
+    	} catch(FileNotFoundException e) {
+    		e.printStackTrace();
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    	
         // END
     }
 }
