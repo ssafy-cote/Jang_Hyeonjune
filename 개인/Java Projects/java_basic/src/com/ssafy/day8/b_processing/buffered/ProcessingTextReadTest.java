@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ProcessingTextReadTest {
     public static void main(String[] args) {
-        File src = new File("./.project");
+        File src = new File("./project");
         try (BufferedReader br = new BufferedReader(new FileReader(src));) {
             String line = null;
             while ((line = br.readLine()) != null) {

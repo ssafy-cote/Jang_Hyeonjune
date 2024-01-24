@@ -40,6 +40,7 @@ public class BufferedReaderVsScanner {
             long start = System.nanoTime();
             String line = null;
             while ((line = br.readLine()) != null) {
+            	int num = Integer.parseInt(line);	// bufferedreader: 별도의 casting 필요
                 // System.out.println(line);
             }
             System.out.printf("br: %10d%n", System.nanoTime() - start);

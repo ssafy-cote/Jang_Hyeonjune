@@ -1,6 +1,8 @@
 package com.ssafy.ws.setp3;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 	private String isbn;
 	private String title;
 	private String author;
@@ -15,6 +17,9 @@ public class Book {
 		this.publisher = publisher;
 		this.price = price;
 		this.desc = desc;
+	}
+	public Book() {
+		// TODO Auto-generated constructor stub
 	}
 	public String GetIsbn() {
 		return isbn;

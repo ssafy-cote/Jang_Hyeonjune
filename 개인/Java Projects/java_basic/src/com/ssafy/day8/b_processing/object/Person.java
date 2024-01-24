@@ -3,8 +3,10 @@ package com.ssafy.day8.b_processing.object;
 import java.io.Serializable;
 
 // TODO: Person 을 직렬화 가능하도록 처리하시오.
-public class Person {
-    public static int age = 10;
+public class Person implements Serializable {
+	private final static int serialVersionUID = 1187731; 
+    public static int age = 10; // 객체의 직렬화 - static은 직렬화 대상 x
+//    private String hobby;
     private String id;
     private transient String pass; // 민감한 데이터
     private Address addr; // has a 관계의 다른 객체
@@ -20,7 +22,7 @@ public class Person {
         return "[id=" + id + ", pass=" + pass + ", addr=" + addr + "]" + age;
     }
 
-     class Address {
+     class Address implements Serializable{
         private String zipCode;
         private String city;
 

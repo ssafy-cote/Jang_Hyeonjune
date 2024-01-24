@@ -40,19 +40,21 @@ public class P1205 {
 
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int Min = Integer.MAX_VALUE;
+		int tmp = 0;
 		for (int i = 0; i < n; i++) {
-			
-			arr.add(s.nextInt());
+			tmp = s.nextInt();
+			arr.add(tmp);
+			if(tmp < Min) Min = tmp;
 		}
 		arr.add(score);
 		arr.sort(Comparator.reverseOrder());
-		System.out.println(arr.indexOf(score));
-		if (arr.indexOf(score) != n) {
+		//
+		if(arr.lastIndexOf(score)<p) {
 			System.out.println(arr.indexOf(score) + 1);
 		} else {
 			System.out.println(-1);
 		}
-		System.out.println(arr.toString());
+//		System.out.println(arr.toString());
 	}
 
 }

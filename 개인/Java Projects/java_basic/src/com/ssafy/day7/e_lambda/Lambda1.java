@@ -21,22 +21,23 @@ public class Lambda1 {
     }
 
     public static void main(String[] args) {
-        myFunctional1Test((String str) -> {
-            System.out.println(str);
-        }, "hong");
+        MyFunctional1 func1 = (str1)-> System.out.println(str1);
+        func1.sayHello("안녕!");
         
-        myFunctional1Test((str) -> {
-            System.out.println(str);
-        }, "hong");
-        
-        myFunctional1Test(str -> System.out.println(str), "hong");
+        myFunctional1Test(
+        		(String str) -> {
+        			System.out.println(str);
+        		}, "hong");
+        myFunctional1Test(str->{
+        	System.out.println(str);
+        }, "gil");
+        myFunctional1Test(str->System.out.println(str), "dong");
         
         myFunctional2Test(num -> {
-            System.out.println(num);
-            return num * 2;
+        	System.out.println(num);
+        	return num * 2;
         }, 10);
-        
-        myFunctional2Test(num-> num*2, 10);
+        myFunctional2Test(num->num*2,10);
     }
 
 }

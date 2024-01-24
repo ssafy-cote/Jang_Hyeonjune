@@ -27,10 +27,10 @@ public class LambdaVariableTest {
         useFIMethod(new MyFunctionalInterface() {
             @Override
             public void useNumber(int num) {
-                // this는 외부 클래스의 instance
+                // this는 Anonymous inner class instance
                 System.out.printf("this: %s\n", this.getClass().getName());
                 System.out.printf("멤버 변수 참조: %d\n", LambdaVariableTest.this.instanceMember++);
-                System.out.printf("로컬 변수 참조: %d\n", localVar); // 읽기 전용 
+                System.out.printf("로컬 변수 참조: %d\n", localVar); // 읽기 전용
                 System.out.println(num++);
             }
         });

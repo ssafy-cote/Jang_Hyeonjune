@@ -20,6 +20,8 @@ public class Lambda3 {
         Integer[] nums = { 1, 5, 4, 3, 8, 9 };
         // TODO: 위 배열을 숫자 오름차순으로 정렬하시오.
 
+        
+        
         // END
     }
 
