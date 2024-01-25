@@ -31,11 +31,14 @@
 
 package baekjoon;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class P15683 {
 
-	public static int[] dx = { -1, 1, 0, 0 };	//좌, 우, 하, 상
+	public static int[] dx = { -1, 1, 0, 0 }; // 좌, 우, 하, 상
 	public static int[] dy = { 0, 0, -1, 1 };
 	public static int[][] arr;
 	public static int[][] arr2;
@@ -46,30 +49,98 @@ public class P15683 {
 
 		int n = s.nextInt();
 		int m = s.nextInt();
+		
+		PriorityQueue<int[]> pq = new PriorityQueue<>((new Comparator<>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				// TODO Auto-generated method stub
+				return o2[2] - o1[2];
+			}
+			
+		}));
 
 		arr = new int[n][m];
 		arr2 = new int[n][m];
 
+		int tmp;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
-				arr[i][j] = s.nextInt();
-				if(arr[i][j] == 6)
+				tmp = s.nextInt();;
+				arr[i][j] = tmp; 
+				if (arr[i][j] == 6)
 					arr2[i][j] = 1;
+				else if(arr[i][j] != 0) {
+					int[] tmp2 = {i,j,tmp};
+					pq.add(tmp2);
+				}
 			}
 		}
+		s.close();
+		
+		for(int[] a: pq) {
+			System.out.println(Arrays.toString(a));
+		}
+		
+//		Collections.sort(hash, keySetL);
+		
+//		def(2, 2, 1, n, m);
 
 	}
 
-	public void def(int y, int x, int cctv) {
-		//현재 상태 따로 저장
-		int[][] tmp1 = arr.clone();
-		int[][] tmp2 = arr.clone();
-		int[][] tmp3 = arr.clone();
-		int[][] tmp4 = arr.clone();
+	public static void def(int y, int x, int cctv, int n, int m) {
+
+		int[] dir = new int[4]; //상 하 좌 우
+
+		//상
+		for(int i=y-1; i>=0 ;i--) {
+			if(arr2[i][x] == 1)
+				break;
+			dir[0]++;
+		}
+		
+		//하
+		for(int i=y+1; i<n ;i++) {
+			if(arr2[i][x] == 1)
+				break;
+			dir[1]++;
+		}
 		
 		//좌
+		for(int i=x-1; i>=0 ;i--) {
+			if(arr2[y][i] == 1)
+				break;
+			dir[2]++;
+		}
+		
 		//우
-		//하
-		//상
+		for(int i=x+1; i<m ;i++) {
+			if(arr2[y][i] == 1)
+				break;
+			dir[3]++;
+		}
+
+		System.out.printf("left : %d\nright : %d\nup : %d\ndown : %d\n", dir[0], dir[1], dir[2], dir[3]);
+		
+		Arrays.sort(dir);
+		
+		//1~5번까지 각자 가장 큰것을 출력
+		//3번만 꺽이는거니까 다른거 먼저
+		int count = 0;
+		switch(cctv) {
+		case 4:
+			count = 1;
+			break;	
+		case 2:
+			count = 2;
+			break;
+		case 1:
+			count = 3;
+			break;
+		}
+		
+		for(int k=0; k<count; k++) {
+			
+		}
 	}
 }

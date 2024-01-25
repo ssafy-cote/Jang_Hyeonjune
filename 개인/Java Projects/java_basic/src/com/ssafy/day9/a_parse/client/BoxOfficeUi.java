@@ -114,7 +114,14 @@ public class BoxOfficeUi extends JFrame {
         });
 
         // TODO:테이블에서 행을 더블클릭했을 때 발생하는 이벤트를 처리하여 showDetailFrame 메서드를 호출해보자.
-
+        tblBoxOffice.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    showDetailFrame();
+                }
+            }
+        });
         // END
     }
 
@@ -128,5 +135,7 @@ public class BoxOfficeUi extends JFrame {
         frame.setVisible(true);
         return frame;
     }
+    
+    
 
 }

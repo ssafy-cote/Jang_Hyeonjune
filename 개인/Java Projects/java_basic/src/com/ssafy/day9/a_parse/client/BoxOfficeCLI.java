@@ -1,8 +1,6 @@
 package com.ssafy.day9.a_parse.client;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import com.ssafy.day9.a_parse.dto.BoxOffice;
@@ -18,12 +16,14 @@ public class BoxOfficeCLI {
     }
 
     private void readBoxOfficeList() {
-        
-        // TODO: resource와 parser를 구성해서 정보를 가져와보자.
 
-        // END
-        
-        
+//    	this.resource = BoxOfficeCLI.class.getResourceAsStream("../res/boxoffice.xml");
+//    	this.parser = BoxOfficeDomParser.getParser();
+//    	this.parser = BoxOfficeSaxParser.getParser();
+    	
+    	//JSON
+    	this.resource = BoxOfficeCLI.class.getResourceAsStream("../res/boxoffice.json");
+    	this.parser = BoxOfficeJsonParser.getParser();
         List<BoxOffice> list = parser.getBoxOffice(resource);
         System.out.println("list size: " + list.size());
         for (BoxOffice boxOffice : list) {

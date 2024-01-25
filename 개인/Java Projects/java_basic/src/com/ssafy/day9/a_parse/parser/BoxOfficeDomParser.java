@@ -50,14 +50,31 @@ public class BoxOfficeDomParser implements BoxOfficeParser {
 
     private void parse(Element root) {
         // TODO: root에서 dailyBoxOffice를 추출한 후 BoxOffice를 생성해 list에 저장하시오.
-
+    	NodeList list = root.getElementsByTagName("dailyBoxOffice");
+    	for(int i=0; i<list.getLength(); i++) {
+    		Node child = list.item(i);	// boxffice
+    		BoxOffice bo = getBoxOffice(child);
+    		this.list.add(bo);
+    	}
         // END
     }
 
     private static BoxOffice getBoxOffice(Node node) {
         BoxOffice boxOffice = new BoxOffice();
         // TODO: node 정보를 이용해서 BoxOffice를 구성하고 반환하시오.
-
+        NodeList subNodes = node.getChildNodes();
+        for(int i=0; i<subNodes.getLength(); i++) {
+        	Node sub = subNodes.item(i);
+        	if(sub.getNodeName().equals("rank")) {
+        		boxOffice.setRank(Integer.parseInt(sub.getTextContent()));
+        	} else if (sub.getNodeName().equals("movieNm")) {
+        		boxOffice.setMovieNm(sub.getTextContent());
+        	} else if (sub.getNodeName().equals("openDt")) {
+        		boxOffice.setOpenDt(boxOffice.toDate(sub.getTextContent()));
+        	} else if (sub.getNodeName().equals("audiAcc")) {
+        		boxOffice.setAudiAcc(Integer.parseInt(sub.getTextContent()));
+        	}
+        }
         // END
         return boxOffice;
     }
