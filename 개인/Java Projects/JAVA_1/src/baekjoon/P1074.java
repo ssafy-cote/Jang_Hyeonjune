@@ -23,25 +23,49 @@
 
 package baekjoon;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class P1074 {
 
 	static int[][] arr;
-	static int[] dx = {0,1,0,1};
-	static int[] dy = {0,0,1,1};
+	static int[] dx = {-1,0,-1,0};
+	static int[] dy = {-1,-1,0,0};
+	static int count = 1;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
-		int r = s.nextInt();
-		int c = s.nextInt();
+//		int r = s.nextInt();
+//		int c = s.nextInt();
+		
+		n = (int)Math.pow(2,n);
+		System.out.println(n);
 		
 		arr = new int[n][n];
+		df(n-1,n-1,n);
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				System.out.print(arr[i][j] + "\t");
+			}
+			System.out.println();
+		}
 	}
 
-	public static void df() {
-		
+	public static void df(int x, int y, int n) {
+		if(n==2) {
+			arr[y][x] = count;
+			count++;
+			return;
+		}
+			// 왼쪽위
+			df(x/2+1,y/2+1,n/2);
+			// 오른쪽 위
+			df(x,y/2+1,n/2);
+			// 왼쪽 아래
+			df(x/2+1,y,n/2);
+			// 오른쪽 아래(본인)
+			df(x,y,n/2);
 	}
 }
