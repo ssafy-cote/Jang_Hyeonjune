@@ -18,61 +18,54 @@
  * r행 c열을 몇 번째로 방문했는지 출력한다.
  * 
  * 
- * 원래는 배열을 구현해서 문제를 풀었으나, 메모리, 시간초과가 발생
- * 4분할 방식을 도입!
  * 
  */
 
-package baekjoon;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class P1074 {
-	static int[] dx = { -1, 0, -1, 0 };
-	static int[] dy = { -1, -1, 0, 0 };
-	static int count;
-	static int r, c;
+public class Main {
 
+	static int[][] arr;
+	static int[] dx = {-1,0,-1,0};
+	static int[] dy = {-1,-1,0,0};
+	static int count;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
-		r = s.nextInt();
-		c = s.nextInt();
-
-		n = (int) Math.pow(2, n);
+		int r = s.nextInt();
+		int c = s.nextInt();
+		
+		n = (int)Math.pow(2,n);
 //		System.out.println(n);
-
-//		arr = new int[n][n];
-		df(n, n, n*n);
+		
+		arr = new int[n][n];
+		df(n,n,n);
 //		for(int i=0; i<n; i++) {
 //			for(int j=0; j<n; j++) {
 //				System.out.print(arr[i][j] + "\t");
 //			}
 //			System.out.println();
 //		}
-//		System.out.println(arr[r][c]);
+		System.out.println(arr[r][c]);
 	}
 
 	public static void df(int x, int y, int n) {
-		if (y - 1 == r && x - 1 == c) {
-			System.out.println(n - 1);
+		if(n==1) {
+			arr[y-1][x-1] = count;
+			count++;
 			return;
-		} else {
-			if (y - 1 >= r && x - 1 >= c) {
-				// 오른쪽 아래(본인)
-				df(x, y, n * 4);
-			} else if (y - 1 >= r && x - 1 < c) {
-				// 왼쪽 아래
-				df(x - n / 2, y, n * 3);
-			} else if (y - 1 < r && x - 1 >= c) {
-				// 오른쪽 위
-				df(x, y - n / 2, n * 2);
-			} else if (y - 1 < r && x - 1 < c) {
-				// 왼쪽위
-				df(x - n / 2, y - n / 2, n * 1);
-			}
 		}
+			// 왼쪽위
+			df(x - n/2,y - n/2,n/2);
+			// 오른쪽 위
+			df(x,y - n/2,n/2);
+			// 왼쪽 아래
+			df(x - n/2,y,n/2);
+			// 오른쪽 아래(본인)
+			df(x,y,n/2);
 	}
 }

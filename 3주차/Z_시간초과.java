@@ -23,29 +23,27 @@
  * 
  */
 
-package baekjoon;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class P1074 {
-	static int[] dx = { -1, 0, -1, 0 };
-	static int[] dy = { -1, -1, 0, 0 };
+public class Main {
+	static int[] dx = {-1,0,-1,0};
+	static int[] dy = {-1,-1,0,0};
 	static int count;
 	static int r, c;
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
 		r = s.nextInt();
 		c = s.nextInt();
-
-		n = (int) Math.pow(2, n);
+		
+		n = (int)Math.pow(2,15);
 //		System.out.println(n);
-
+		
 //		arr = new int[n][n];
-		df(n, n, n*n);
+		df(n,n,n);
 //		for(int i=0; i<n; i++) {
 //			for(int j=0; j<n; j++) {
 //				System.out.print(arr[i][j] + "\t");
@@ -56,23 +54,22 @@ public class P1074 {
 	}
 
 	public static void df(int x, int y, int n) {
-		if (y - 1 == r && x - 1 == c) {
-			System.out.println(n - 1);
-			return;
-		} else {
-			if (y - 1 >= r && x - 1 >= c) {
-				// 오른쪽 아래(본인)
-				df(x, y, n * 4);
-			} else if (y - 1 >= r && x - 1 < c) {
-				// 왼쪽 아래
-				df(x - n / 2, y, n * 3);
-			} else if (y - 1 < r && x - 1 >= c) {
-				// 오른쪽 위
-				df(x, y - n / 2, n * 2);
-			} else if (y - 1 < r && x - 1 < c) {
-				// 왼쪽위
-				df(x - n / 2, y - n / 2, n * 1);
+		if(n==1) {
+//			arr[y-1][x-1] = count;
+			if(y-1 == r && x-1 ==c) {
+				System.out.println(count);
+				return;
 			}
+			count++;
+			return;
 		}
+			// 왼쪽위
+			df(x - n/2,y - n/2,n/2);
+			// 오른쪽 위
+			df(x,y - n/2,n/2);
+			// 왼쪽 아래
+			df(x - n/2,y,n/2);
+			// 오른쪽 아래(본인)
+			df(x,y,n/2);
 	}
 }
