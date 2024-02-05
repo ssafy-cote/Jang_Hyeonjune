@@ -1,5 +1,4 @@
 package algo0202;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -95,19 +94,27 @@ public class Solution_1873_상호의배틀필드_장현준 {
 				for (int j = 0; j < str.length(); j++) {
 					char tmp = str.charAt(j);
 					map[i][j] = tmp;
-					if (tmp == '^' || tmp == 'v' || tmp == '<' || tmp == '>') {
+					if (tmp == '^') {
+						d = 0;
+						x = j;
+						y = i;
+					}
+					if (tmp == 'v') {
+						d = 1;
+						x = j;
+						y = i;
+					}
+					if (tmp == '<') {
+						d = 2;
+						x = j;
+						y = i;
+					}
+					if (tmp == '>') {
+						d = 3;
 						x = j;
 						y = i;
 					}
 				}
-			}
-
-			System.out.println();
-			for (int i = 0; i < H; i++) {
-				for (int j = 0; j < W; j++) {
-					System.out.print((char) map[i][j] + "\t");
-				}
-				System.out.println();
 			}
 
 			// 명령어 파트
@@ -118,6 +125,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 			st = new StringTokenizer(br.readLine());
 			String str = st.nextToken();
 			for (int i = 0; i < N; i++) {
+//				System.out.println(str.charAt(i));
 				switch (str.charAt(i)) {
 				case 'U': // 평지(전차가 들어갈 수 있다.
 					Up();
@@ -132,6 +140,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 					Right();
 					break;
 				case 'S':
+					Shoot();
 					break;
 				}
 			}
@@ -152,7 +161,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 		d = 0;
 		map[y][x] = '^';
 		// 한 칸 위의 칸이 평지라면 위 그 칸으로 이동한다.
-		if (y - 1 < 0 && map[y - 1][x] == '.') { // 맵밖이라면 제외
+		if (y - 1 >= 0 && map[y - 1][x] == '.') { // 맵밖이라면 제외
 			map[y][x] = '.';
 			x += dx[d];
 			y += dy[d];
@@ -166,7 +175,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 		d = 1;
 		map[y][x] = 'v';
 		// 한 칸 아래의 칸이 평지라면 아래 그 칸으로 이동한다.
-		if (y + 1 >= H && map[y + 1][x] == '.') { // 맵밖이라면 제외
+		if (y + 1 < H && map[y + 1][x] == '.') { // 맵밖이라면 제외
 			map[y][x] = '.';
 			x += dx[d];
 			y += dy[d];
@@ -179,7 +188,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 		d = 2;
 		map[y][x] = '<';
 		// 한 칸 왼쪽 칸이 평지라면 왼쪽의 그 칸으로 이동한다.
-		if (x - 1 < 0 && map[y][x - 1] == '.') { // 맵밖이라면 제외
+		if (x - 1 >= 0 && map[y][x - 1] == '.') { // 맵밖이라면 제외
 			map[y][x] = '.';
 			x += dx[d];
 			y += dy[d];
@@ -192,7 +201,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 		d = 3;
 		map[y][x] = '>';
 		// 한 칸 오른쪽 칸이 평지라면 오른쪽의 그 칸으로 이동한다.
-		if (x + 1 <= W && map[y][x + 1] == '.') { // 맵밖이라면 제외
+		if (x + 1 < W && map[y][x + 1] == '.') { // 맵밖이라면 제외
 			map[y][x] = '.';
 			x += dx[d];
 			y += dy[d];
@@ -206,7 +215,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 		while(true) {
 			sx += dx[d];
 			sy += dy[d];
-			if(sx < 0 || sx >=W || sy < 0 || sy >=H) {
+			if(sx < 0 || sx >= W || sy < 0 || sy >= H) {
 				sx = x;
 				sy = y;
 				break;
@@ -218,7 +227,7 @@ public class Solution_1873_상호의배틀필드_장현준 {
 				break;
 			}
 			else if(map[sy][sx] =='#') {
-				map[sy][sx] = '.';
+				map[sy][sx] = '#';
 				sx = x;
 				sy = y;
 				break;
